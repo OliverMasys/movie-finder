@@ -99,29 +99,34 @@ function displayFavorites() {
     favorites.forEach(movie => {
         // TODO: Create the favorite movie card and append it to the favorites section
         // Hint: Use a similar card template as in displaySearchResults to maintain consistency in the UI.
-        
+        if (favorites.length > 0) {
         const movieCard = document.createElement('div');
         movieCard.className = 'col';
         // TODO: Create the favorite movie card with 'Remove from Favorites' button
         // Hint: Review the movie card from the search results
         movieCard.innerHTML = `
-            <button class="btn btn-danger" onclick="removeFromFavorites('${movie.imdbID}')">Remove from Favorites</button>
+            <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">${movie.Title}</h5>
+                <button class="btn btn-danger" onclick="removeFromFavorites('${movie.imdbID}')">Remove from Favorites</button>
+            </div>
         `;
         favoritesContainer.appendChild(movieCard);
-    });
+   } });
+
 }
 
 function removeFromFavorites(imdbID) {
     // Remove the selected movie from localStorage and update the favorites section
     // Hint: Filter out the movie by its imdbID, then update localStorage and call displayFavorites.
     // TODO: Remove the movies from localStorage
-
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     // Filter for specific movie
     favorites = favorites.filter(movie => movie.imdbID !== imdbID);
     // TODO: Update localStorage
-
     // TODO: Update the favorites list
-
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    displayFavorites();
 }
 
 // Display favorites on page load
