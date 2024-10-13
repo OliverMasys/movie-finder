@@ -24,7 +24,7 @@ document.getElementById('searchForm').addEventListener('submit', function (event
 function searchMovies(query) {
     // Implement the Fetch API to retrieve movie data from the OMDb API
     fetch(`https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`)
-        .then(response =>.json()/* TODO: parse reponse body as JSON response.json() */)
+        .then(response => response.json()/* TODO: parse reponse body as JSON response.json() */)
         .then(data => {
             // TODO: Call the function to display the search results
             // Hint: Check if data.Search exists before passing it to the displaySearchResults function.
