@@ -8,7 +8,7 @@
  * Movie Finder App works as expected.
  */
 
-const apiKey = 'your_api_key'; // Replace with your OMDb API key
+const apiKey = 'ac268f96'; // Replace with your OMDb API key
 
 // Create event listener for search submit
 document.getElementById('searchForm').addEventListener('submit', function (event) {
@@ -17,17 +17,22 @@ document.getElementById('searchForm').addEventListener('submit', function (event
     const query = document.getElementById('searchInput').value;
     // TODO: Call the function to search for movies using the query
     // Hint: Use the searchMovies function, passing the user's search input (query) as the argument.
+    searchMovies(query);
     
 });
 
 function searchMovies(query) {
     // Implement the Fetch API to retrieve movie data from the OMDb API
     fetch(`https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`)
-        .then(/* TODO: parse reponse body as JSON response.json() */)
+        .then(response =>.json()/* TODO: parse reponse body as JSON response.json() */)
         .then(data => {
             // TODO: Call the function to display the search results
             // Hint: Check if data.Search exists before passing it to the displaySearchResults function.
-
+            if (data.Search) {
+                displaySearchResults(data.Search);
+            }else {
+                document.getElementById('results').innerHTML = '<p>No movies found.</p>';
+            }
         })
         // Error handling
         .catch(error => console.error('Error fetching movies:', error));
