@@ -64,7 +64,7 @@ function displaySearchResults(movies) {
     } else {
         // TODO: Display a message when no movies are found
         // Hint: You can update the innerHTML of the searchResults to display a "No movies found" message.
-        
+        searchResults.innerHTML = '<p>No movie found.</p>';
     }
 }
 
@@ -77,13 +77,15 @@ function saveToFavorites(imdbID) {
         .then(movie => {
             let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
             // TODO: Store the saved movie in the favorites array
-
+            if (!favorites.some(favMovie => favMovie.imdbID == movie.imdbID)) {
+                favorites.push(movie);
             // TODO: Store the saved movie in the favorites localStorage
             // Hint: Use setItem on the localStorage object
-            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
             // TODO: Update the UI favorites section after saving a new movie
             // Hint: Call the displayFavorites function to refresh the favorites list.
-
+            displayFavorites();
+            }
         })
         .catch(error => console.error('Error saving favorite:', error));
 }
@@ -97,6 +99,7 @@ function displayFavorites() {
     favorites.forEach(movie => {
         // TODO: Create the favorite movie card and append it to the favorites section
         // Hint: Use a similar card template as in displaySearchResults to maintain consistency in the UI.
+        
         const movieCard = document.createElement('div');
         movieCard.className = 'col';
         // TODO: Create the favorite movie card with 'Remove from Favorites' button
