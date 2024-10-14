@@ -106,10 +106,12 @@ function displayFavorites() {
         // Hint: Review the movie card from the search results
         movieCard.innerHTML = `
             <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">${movie.Title}</h5>
-                <button class="btn btn-danger" onclick="removeFromFavorites('${movie.imdbID}')">Remove from Favorites</button>
-            </div>
+            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
+                <div class="card-body">
+                    <h5 class="card-title">${movie.Title}</h5>
+                    <p class="card-text">${movie.Year}</p>
+                    <button class="btn btn-danger" onclick="removeFromFavorites('${movie.imdbID}')">Remove from Favorites</button>
+                </div>
         `;
         favoritesContainer.appendChild(movieCard);
    } });
